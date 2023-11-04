@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.Office.Interop.Word;
 using PLApp.Entity;
 using PLApp.Entity.TableEntity;
 using System;
@@ -15,10 +14,10 @@ namespace PLApp.Controller.BankAccountManagement
 {
     internal class BankManagementController
     {
-        TableContext tableContext;
-        public BankManagementController(TableContext tableContext)
+        private TableContext tableContext = new TableContext();
+        public BankManagementController()
         {
-            this.tableContext = tableContext;
+           
         }
         public async void saveBankAccInfo(BankAccount bankAccount)
         {

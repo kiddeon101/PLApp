@@ -18,13 +18,14 @@ namespace PLApp.Forms.BankAccountManagement
 {
     public partial class BankAccManagementForm : Form
     {
-        private TableContext tableContext = new TableContext();
+        
         private FormController formController;
         private BankManagementController bankManagementController;
-
+        private TableContext tableContext;
         internal BankAccManagementForm(FormController formController)
         {
-            bankManagementController = new BankManagementController(tableContext);
+            bankManagementController = new BankManagementController();
+            tableContext = new TableContext();
             this.formController = formController;
             InitializeComponent();
         }
@@ -45,7 +46,7 @@ namespace PLApp.Forms.BankAccountManagement
             dgvBankAccounts.Rows.Clear();
             foreach (BankAccount bankAccount in bankAccounts)
             {
-                dgvBankAccounts.Rows.Add("ACC" + bankAccount.Id.ToString().PadLeft(4, '0'), bankAccount.AccountName, bankAccount.BankName, bankAccount.AccountCurrency, bankAccount.OpenBalanceAmount, bankAccount.OpenBalanceDate.ToString("MM/dd/yyyy"), bankAccount.Id);
+                dgvBankAccounts.Rows.Add("ACC" + bankAccount.Id.ToString().PadLeft(4, '0'), bankAccount.AccountName, bankAccount.BankName, bankAccount.AccountCurrency, bankAccount.OpenBalanceAmount, bankAccount.OpenBalanceDate.ToString("dd/MM/yyyy"), bankAccount.Id);
             }
 
 

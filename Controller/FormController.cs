@@ -12,12 +12,13 @@ namespace PLApp.Controller
         private TabControl tbcMain;
         private TabPage tbpDashboard;
         private TabPage tbpContent;
+        private Panel pnlContent;
 
-        public FormController(TabControl tbcMain, TabPage tbpDashboard, TabPage tbpContent) {
+        public FormController(TabControl tbcMain, TabPage tbpDashboard, TabPage tbpContent, Panel pnlContent) {
             this.tbcMain = tbcMain;
             this.tbpDashboard = tbpDashboard;
             this.tbpContent = tbpContent;
-
+            this.pnlContent = pnlContent;
         }
 
         public void mainTabControll(TAB_ACTION action)
@@ -54,6 +55,29 @@ namespace PLApp.Controller
                     //tp.Refresh();
                 }
                 tp.Refresh();
+
+            }, CancellationToken.None, TaskCreationOptions.None, uiScheduler);
+        }
+
+        public void AddFormToConentPanel( Form f)
+        {
+
+            TaskScheduler uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
+
+            Task.Factory.StartNew(() =>
+            {
+
+                if (!pnlContent.Controls.Contains(f))
+                {
+                    pnlContent.Controls.Clear();
+                    f.TopLevel = false;
+                    //tp.Controls.Add(f);
+                    f.Parent = pnlContent;
+                    f.Dock = DockStyle.Fill;
+                    f.Show();
+                    //tp.Refresh();
+                }
+                pnlContent.Refresh();
 
             }, CancellationToken.None, TaskCreationOptions.None, uiScheduler);
         }

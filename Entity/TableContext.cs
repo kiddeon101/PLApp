@@ -13,6 +13,7 @@ namespace PLApp.Entity
     {
 
         public DbSet<BankAccount> BankAccounts { get; set; }
+        public DbSet<BankTransaction> BankTransactions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

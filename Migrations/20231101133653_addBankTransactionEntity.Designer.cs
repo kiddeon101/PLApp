@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PLApp.Entity;
 
@@ -11,9 +12,11 @@ using PLApp.Entity;
 namespace PLApp.Migrations
 {
     [DbContext(typeof(TableContext))]
-    partial class TableContextModelSnapshot : ModelSnapshot
+    [Migration("20231101133653_addBankTransactionEntity")]
+    partial class addBankTransactionEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,7 +85,7 @@ namespace PLApp.Migrations
                     b.Property<string>("recipientName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("transactionDate")
+                    b.Property<DateTime?>("transactionDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("transactionType")
@@ -95,7 +98,7 @@ namespace PLApp.Migrations
 
                     b.HasIndex("bankAccountId");
 
-                    b.ToTable("BankTransactions");
+                    b.ToTable("BankTransaction");
                 });
 
             modelBuilder.Entity("PLApp.Entity.TableEntity.BankTransaction", b =>

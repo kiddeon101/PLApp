@@ -37,8 +37,8 @@
             btnUpdateTaskList = new Button();
             btnUpdateCompanyInformation = new Button();
             tbpContent = new TabPage();
-            lblContentTitle = new Label();
             pnlContent = new Panel();
+            lblContentTitle = new Label();
             tbcMain.SuspendLayout();
             tbpDashboard.SuspendLayout();
             tbpContent.SuspendLayout();
@@ -117,6 +117,7 @@
             btnUpdateTaskList.TabIndex = 24;
             btnUpdateTaskList.Text = "Import Bank Account Update File";
             btnUpdateTaskList.UseVisualStyleBackColor = true;
+            btnUpdateTaskList.Click += btnUpdateTaskList_Click;
             // 
             // btnUpdateCompanyInformation
             // 
@@ -140,6 +141,13 @@
             tbpContent.TabIndex = 1;
             tbpContent.Text = "Content";
             // 
+            // pnlContent
+            // 
+            pnlContent.Location = new Point(0, 54);
+            pnlContent.Name = "pnlContent";
+            pnlContent.Size = new Size(1263, 645);
+            pnlContent.TabIndex = 26;
+            // 
             // lblContentTitle
             // 
             lblContentTitle.Font = new Font("Calibri", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
@@ -149,13 +157,6 @@
             lblContentTitle.TabIndex = 25;
             lblContentTitle.Text = "[title]";
             lblContentTitle.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // pnlContent
-            // 
-            pnlContent.Location = new Point(0, 54);
-            pnlContent.Name = "pnlContent";
-            pnlContent.Size = new Size(1263, 645);
-            pnlContent.TabIndex = 26;
             // 
             // PLApp
             // 

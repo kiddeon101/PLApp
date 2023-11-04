@@ -28,5 +28,7 @@ namespace PLApp.Entity.TableEntity
 
         [Required]
         public DateTime OpenBalanceDate { get; set; }
+
+        public ICollection<BankTransaction> BankTransactions { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PLApp.Entity;
 
@@ -11,9 +12,11 @@ using PLApp.Entity;
 namespace PLApp.Migrations
 {
     [DbContext(typeof(TableContext))]
-    partial class TableContextModelSnapshot : ModelSnapshot
+    [Migration("20231105114932_fixTransactionImport")]
+    partial class fixTransactionImport
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,60 +54,6 @@ namespace PLApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("BankAccounts");
-                });
-
-            modelBuilder.Entity("PLApp.Entity.TableEntity.BankDetailedTransaction", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BankTransactionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("accountMonth")
-                        .HasColumnType("int");
-
-                    b.Property<int>("accountYear")
-                        .HasColumnType("int");
-
-                    b.Property<double>("amount")
-                        .HasColumnType("float");
-
-                    b.Property<string>("category")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("customer")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("details")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("invoiceNum")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("isIncomming")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("projectNum")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("purchaseOrderNum")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BankTransactionId");
-
-                    b.ToTable("BankDetailedTransactions");
                 });
 
             modelBuilder.Entity("PLApp.Entity.TableEntity.BankTransaction", b =>
@@ -155,17 +104,6 @@ namespace PLApp.Migrations
                     b.ToTable("BankTransactions");
                 });
 
-            modelBuilder.Entity("PLApp.Entity.TableEntity.BankDetailedTransaction", b =>
-                {
-                    b.HasOne("PLApp.Entity.TableEntity.BankTransaction", "BankTransaction")
-                        .WithMany("BankDetailedTransactions")
-                        .HasForeignKey("BankTransactionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("BankTransaction");
-                });
-
             modelBuilder.Entity("PLApp.Entity.TableEntity.BankTransaction", b =>
                 {
                     b.HasOne("PLApp.Entity.TableEntity.BankAccount", "bankAccount")
@@ -180,11 +118,6 @@ namespace PLApp.Migrations
             modelBuilder.Entity("PLApp.Entity.TableEntity.BankAccount", b =>
                 {
                     b.Navigation("BankTransactions");
-                });
-
-            modelBuilder.Entity("PLApp.Entity.TableEntity.BankTransaction", b =>
-                {
-                    b.Navigation("BankDetailedTransactions");
                 });
 #pragma warning restore 612, 618
         }

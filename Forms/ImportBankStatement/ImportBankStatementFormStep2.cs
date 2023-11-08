@@ -52,11 +52,23 @@ namespace PLApp.Forms.ImportBankStatement
 
             if (!txtExcelPath.Text.IsNullOrEmpty())
             {
-                await Task.Run(() =>
+                if (cmbImportType.SelectedIndex == 0)
                 {
-                    bankTransactions = importBankStatementController.getDataFromExcel(txtExcelPath.Text, importBankStatementController.GetExcelManager());
+                    //Process China bank statement
+                    await Task.Run(() =>
+                    {
+                        bankTransactions = importBankStatementController.getDataFromExcel(txtExcelPath.Text);
 
-                });
+                    });
+
+                }
+                else if (cmbImportType.SelectedIndex == 1)
+                {
+                    //Process USD Account Statement                 
+                    bankTransactions = importBankStatementController.getStatementFromExcel(txtExcelPath.Text, cmbImportType.SelectedIndex);
+
+                    dgvBankTransactions.Rows.Clear();
+                }
                 dgvBankTransactions.Rows.Clear();
                 int rowCnt = 0;
                 foreach (BankTransaction transaction in bankTransactions)
@@ -71,6 +83,7 @@ namespace PLApp.Forms.ImportBankStatement
                     }
                     rowCnt++;
                 }
+
 
             }
         }
@@ -103,7 +116,9 @@ namespace PLApp.Forms.ImportBankStatement
 
         private void ImportBankStatementFormStep2_Load(object sender, EventArgs e)
         {
-
+            lblAccountName.Text = importBankStatementController.bankAccount.AccountName;
+            lblAccountNumber.Text = importBankStatementController.bankAccount.BankName;
+            cmbImportType.SelectedIndex = 0;
         }
 
         private void btnStartImport_Click(object sender, EventArgs e)
@@ -125,6 +140,7 @@ namespace PLApp.Forms.ImportBankStatement
                     transaction.outwardAmount = CommonTools.ConvertToDouble(dataGridViewRow.Cells[7].Value);
                     transaction.inwardAmount = CommonTools.ConvertToDouble(dataGridViewRow.Cells[8].Value);
                     transaction.bankAccountId = importBankStatementController.bankAccount.Id;
+                    transaction.statementType = cmbImportType.SelectedIndex;
                     bankTransactions.Add(transaction);
                 }
             }

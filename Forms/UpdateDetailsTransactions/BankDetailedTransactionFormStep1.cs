@@ -1,9 +1,5 @@
-﻿using PLApp.Constants;
+﻿using PLApp.Controller.BankAccountManagement;
 using PLApp.Controller;
-using PLApp.Controller.BankAccountManagement;
-using PLApp.Controller.ImportBankStatement;
-using PLApp.Entity;
-using PLApp.Entity.TableEntity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,28 +9,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PLApp.Controller.BankDetailsTransaction;
+using PLApp.Entity;
+using PLApp.Entity.TableEntity;
+using PLApp.Constants;
+using PLApp.Controller.IssueBankStatement;
+using PLApp.Forms.IssueBankStatement;
 
-namespace PLApp.Forms.ImportBankStatement
+namespace PLApp.Forms.UpdateDetailsTransactions
 {
-    public partial class ImportBankStatementFormStep1 : Form
+    public partial class BankDetailedTransactionFormStep1 : Form
     {
         private FormController formController;
         private BankManagementController bankManagementController;
-        private ImportBankStatementController importBankStatementController;
+        private BankDetailedTransactionController detailedTransactionController;
         private TableContext tableContext;
-        internal ImportBankStatementFormStep1(FormController formController)
+
+        internal BankDetailedTransactionFormStep1(FormController formController)
         {
             bankManagementController = new BankManagementController();
-            importBankStatementController = new ImportBankStatementController();
+            detailedTransactionController = new BankDetailedTransactionController();
             tableContext = new TableContext();
             this.formController = formController;
             InitializeComponent();
         }
 
-        private void ImportBankStatementFormStep1_Load(object sender, EventArgs e)
+        private void BankDetailedTransactionFormStep1_Load(object sender, EventArgs e)
         {
             loadTable("");
         }
+
         private async void loadTable(string accName)
         {
             List<BankAccount> bankAccounts = new List<BankAccount>();
@@ -49,7 +53,6 @@ namespace PLApp.Forms.ImportBankStatement
                 dgvBankAccounts.Rows.Add("ACC" + bankAccount.Id.ToString().PadLeft(4, '0'), bankAccount.AccountName, bankAccount.BankName, bankAccount.AccountCurrency, bankAccount.OpenBalanceAmount, bankAccount.OpenBalanceDate.ToString("dd/MM/yyyy"), 0, bankAccount.Id);
             }
 
-
         }
 
         private void txtAccName_KeyDown(object sender, KeyEventArgs e)
@@ -60,21 +63,13 @@ namespace PLApp.Forms.ImportBankStatement
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Are you sure to cancel the process?", "Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                formController.mainTabControll(TAB_ACTION.REMOVE);
-            }
-        }
-
         private void btnAction_Click(object sender, EventArgs e)
         {
             if (dgvBankAccounts.SelectedRows.Count > 0)
             {
                 int accId = CommonTools.ConvertToInt(dgvBankAccounts.SelectedRows[0].Cells[7].Value);
-                importBankStatementController.bankAccount = tableContext.BankAccounts.Single(x => x.Id == accId);
-                ImportBankStatementFormStep2 tempForm = new ImportBankStatementFormStep2(formController, importBankStatementController);
+                detailedTransactionController.bankAccount = tableContext.BankAccounts.Single(x => x.Id == accId);
+                BankDetailedTransactionFromStep2 tempForm = new BankDetailedTransactionFromStep2(formController, detailedTransactionController);
                 formController.AddFormToConentPanel(tempForm);
             }
             else
@@ -83,7 +78,15 @@ namespace PLApp.Forms.ImportBankStatement
             }
         }
 
-        private void dgvBankAccounts_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure to cancel the process?", "Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                formController.mainTabControll(TAB_ACTION.REMOVE);
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }

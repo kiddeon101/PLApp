@@ -30,6 +30,19 @@
         {
             label1 = new Label();
             dgvBankTransactions = new DataGridView();
+            label2 = new Label();
+            label3 = new Label();
+            txtExcelPath = new TextBox();
+            btnLoadData = new Button();
+            btnBrowse = new Button();
+            btnStartImport = new Button();
+            btnClose = new Button();
+            label4 = new Label();
+            label5 = new Label();
+            lblAccountName = new Label();
+            lblAccountNumber = new Label();
+            sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
+            cmbImportType = new ComboBox();
             Column1 = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
             Column3 = new DataGridViewTextBoxColumn();
@@ -40,13 +53,6 @@
             Column8 = new DataGridViewTextBoxColumn();
             Column9 = new DataGridViewTextBoxColumn();
             Column10 = new DataGridViewComboBoxColumn();
-            label2 = new Label();
-            label3 = new Label();
-            txtExcelPath = new TextBox();
-            btnLoadData = new Button();
-            btnBrowse = new Button();
-            btnStartImport = new Button();
-            btnClose = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvBankTransactions).BeginInit();
             SuspendLayout();
             // 
@@ -66,91 +72,21 @@
             dgvBankTransactions.BackgroundColor = Color.White;
             dgvBankTransactions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvBankTransactions.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column6, Column7, Column8, Column9, Column10 });
-            dgvBankTransactions.Location = new Point(30, 145);
+            dgvBankTransactions.Location = new Point(30, 199);
             dgvBankTransactions.MultiSelect = false;
             dgvBankTransactions.Name = "dgvBankTransactions";
             dgvBankTransactions.RowHeadersVisible = false;
             dgvBankTransactions.RowTemplate.Height = 25;
             dgvBankTransactions.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvBankTransactions.Size = new Size(1210, 366);
+            dgvBankTransactions.Size = new Size(1210, 312);
             dgvBankTransactions.TabIndex = 4;
             dgvBankTransactions.CellClick += dgvBankTransactions_CellClick;
             dgvBankTransactions.CellValueChanged += dgvBankTransactions_CellValueChanged;
             // 
-            // Column1
-            // 
-            Column1.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            Column1.HeaderText = "Transaction Date";
-            Column1.MinimumWidth = 100;
-            Column1.Name = "Column1";
-            Column1.Resizable = DataGridViewTriState.False;
-            // 
-            // Column2
-            // 
-            Column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            Column2.HeaderText = "Transaction Type";
-            Column2.MinimumWidth = 120;
-            Column2.Name = "Column2";
-            Column2.Width = 120;
-            // 
-            // Column3
-            // 
-            Column3.HeaderText = "Document Category";
-            Column3.MinimumWidth = 100;
-            Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            Column4.HeaderText = "Voucher Number";
-            Column4.MinimumWidth = 100;
-            Column4.Name = "Column4";
-            // 
-            // Column5
-            // 
-            Column5.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Column5.HeaderText = "Recipient Name";
-            Column5.Name = "Column5";
-            // 
-            // Column6
-            // 
-            Column6.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Column6.HeaderText = "Recipient Account";
-            Column6.Name = "Column6";
-            // 
-            // Column7
-            // 
-            Column7.HeaderText = "Details";
-            Column7.MinimumWidth = 150;
-            Column7.Name = "Column7";
-            Column7.Width = 150;
-            // 
-            // Column8
-            // 
-            Column8.HeaderText = "Outward Amount";
-            Column8.MinimumWidth = 100;
-            Column8.Name = "Column8";
-            // 
-            // Column9
-            // 
-            Column9.HeaderText = "Inward Amount";
-            Column9.MinimumWidth = 100;
-            Column9.Name = "Column9";
-            // 
-            // Column10
-            // 
-            Column10.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            Column10.HeaderText = "Has Conflict";
-            Column10.Items.AddRange(new object[] { "True", "False" });
-            Column10.MinimumWidth = 80;
-            Column10.Name = "Column10";
-            Column10.Resizable = DataGridViewTriState.False;
-            Column10.SortMode = DataGridViewColumnSortMode.Automatic;
-            Column10.Width = 80;
-            // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(30, 127);
+            label2.Location = new Point(30, 180);
             label2.Name = "label2";
             label2.Size = new Size(162, 15);
             label2.TabIndex = 17;
@@ -212,12 +148,139 @@
             btnClose.UseVisualStyleBackColor = true;
             btnClose.Click += btnClose_Click;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(30, 131);
+            label4.Name = "label4";
+            label4.Size = new Size(88, 15);
+            label4.TabIndex = 27;
+            label4.Text = "Account Name:";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(30, 151);
+            label5.Name = "label5";
+            label5.Size = new Size(71, 15);
+            label5.TabIndex = 28;
+            label5.Text = "Bank Name:";
+            // 
+            // lblAccountName
+            // 
+            lblAccountName.AutoSize = true;
+            lblAccountName.Location = new Point(134, 131);
+            lblAccountName.Name = "lblAccountName";
+            lblAccountName.Size = new Size(88, 15);
+            lblAccountName.TabIndex = 29;
+            lblAccountName.Text = "Account Name:";
+            // 
+            // lblAccountNumber
+            // 
+            lblAccountNumber.AutoSize = true;
+            lblAccountNumber.Location = new Point(136, 151);
+            lblAccountNumber.Name = "lblAccountNumber";
+            lblAccountNumber.Size = new Size(88, 15);
+            lblAccountNumber.TabIndex = 30;
+            lblAccountNumber.Text = "Account Name:";
+            // 
+            // sqlCommand1
+            // 
+            sqlCommand1.CommandTimeout = 30;
+            sqlCommand1.EnableOptimizedParameterBinding = false;
+            // 
+            // cmbImportType
+            // 
+            cmbImportType.FormattingEnabled = true;
+            cmbImportType.Items.AddRange(new object[] { "China Bank Account", "USD Account" });
+            cmbImportType.Location = new Point(455, 58);
+            cmbImportType.Name = "cmbImportType";
+            cmbImportType.Size = new Size(121, 23);
+            cmbImportType.TabIndex = 31;
+            // 
+            // Column1
+            // 
+            Column1.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Column1.HeaderText = "Transaction Date";
+            Column1.MinimumWidth = 100;
+            Column1.Name = "Column1";
+            Column1.Resizable = DataGridViewTriState.False;
+            // 
+            // Column2
+            // 
+            Column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Column2.HeaderText = "Transaction Type";
+            Column2.MinimumWidth = 120;
+            Column2.Name = "Column2";
+            Column2.Width = 120;
+            // 
+            // Column3
+            // 
+            Column3.HeaderText = "Document Category";
+            Column3.MinimumWidth = 100;
+            Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            Column4.HeaderText = "Voucher Number";
+            Column4.MinimumWidth = 100;
+            Column4.Name = "Column4";
+            // 
+            // Column5
+            // 
+            Column5.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Column5.HeaderText = "Recipient Name";
+            Column5.Name = "Column5";
+            Column5.Width = 120;
+            // 
+            // Column6
+            // 
+            Column6.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Column6.HeaderText = "Recipient Account";
+            Column6.Name = "Column6";
+            Column6.Width = 130;
+            // 
+            // Column7
+            // 
+            Column7.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Column7.HeaderText = "Details";
+            Column7.MinimumWidth = 150;
+            Column7.Name = "Column7";
+            // 
+            // Column8
+            // 
+            Column8.HeaderText = "Outward Amount";
+            Column8.MinimumWidth = 100;
+            Column8.Name = "Column8";
+            // 
+            // Column9
+            // 
+            Column9.HeaderText = "Inward Amount";
+            Column9.MinimumWidth = 100;
+            Column9.Name = "Column9";
+            // 
+            // Column10
+            // 
+            Column10.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Column10.HeaderText = "Has Conflict";
+            Column10.Items.AddRange(new object[] { "True", "False" });
+            Column10.MinimumWidth = 80;
+            Column10.Name = "Column10";
+            Column10.Resizable = DataGridViewTriState.False;
+            Column10.SortMode = DataGridViewColumnSortMode.Automatic;
+            Column10.Width = 80;
+            // 
             // ImportBankStatementFormStep2
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1271, 645);
+            Controls.Add(cmbImportType);
+            Controls.Add(lblAccountNumber);
+            Controls.Add(lblAccountName);
+            Controls.Add(label5);
+            Controls.Add(label4);
             Controls.Add(btnClose);
             Controls.Add(btnStartImport);
             Controls.Add(btnBrowse);
@@ -248,6 +311,13 @@
         private Button btnLoadData;
         private Button btnBrowse;
         private Button btnStartImport;
+        private Button btnClose;
+        private Label label4;
+        private Label label5;
+        private Label lblAccountName;
+        private Label lblAccountNumber;
+        private Microsoft.Data.SqlClient.SqlCommand sqlCommand1;
+        private ComboBox cmbImportType;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column2;
         private DataGridViewTextBoxColumn Column3;
@@ -258,6 +328,5 @@
         private DataGridViewTextBoxColumn Column8;
         private DataGridViewTextBoxColumn Column9;
         private DataGridViewComboBoxColumn Column10;
-        private Button btnClose;
     }
 }

@@ -2,8 +2,10 @@
 using PLApp.Controller;
 using PLApp.Controller.BankAccountManagement;
 using PLApp.Controller.ImportBankStatement;
+using PLApp.Controller.IssueBankStatement;
 using PLApp.Entity;
 using PLApp.Entity.TableEntity;
+using PLApp.Forms.ImportBankStatement;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,27 +16,31 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PLApp.Forms.ImportBankStatement
+namespace PLApp.Forms.IssueBankStatement
 {
-    public partial class ImportBankStatementFormStep1 : Form
+    public partial class IssueBankStatementFormStep1 : Form
     {
         private FormController formController;
         private BankManagementController bankManagementController;
-        private ImportBankStatementController importBankStatementController;
+        private IssueBankStatementController issueBankStatementController;
         private TableContext tableContext;
-        internal ImportBankStatementFormStep1(FormController formController)
+        internal IssueBankStatementFormStep1(FormController formController)
         {
             bankManagementController = new BankManagementController();
-            importBankStatementController = new ImportBankStatementController();
+            issueBankStatementController = new IssueBankStatementController();
             tableContext = new TableContext();
             this.formController = formController;
             InitializeComponent();
         }
 
-        private void ImportBankStatementFormStep1_Load(object sender, EventArgs e)
+        private void txtAccName_KeyDown(object sender, KeyEventArgs e)
         {
-            loadTable("");
+            if (e.KeyCode == Keys.Enter)
+            {
+                loadTable(txtAccName.Text);
+            }
         }
+
         private async void loadTable(string accName)
         {
             List<BankAccount> bankAccounts = new List<BankAccount>();
@@ -49,14 +55,30 @@ namespace PLApp.Forms.ImportBankStatement
                 dgvBankAccounts.Rows.Add("ACC" + bankAccount.Id.ToString().PadLeft(4, '0'), bankAccount.AccountName, bankAccount.BankName, bankAccount.AccountCurrency, bankAccount.OpenBalanceAmount, bankAccount.OpenBalanceDate.ToString("dd/MM/yyyy"), 0, bankAccount.Id);
             }
 
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
 
         }
 
-        private void txtAccName_KeyDown(object sender, KeyEventArgs e)
+        private void IssueBankStatementFormStep1_Load(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            loadTable("");
+        }
+
+        private void btnAction_Click(object sender, EventArgs e)
+        {
+            if (dgvBankAccounts.SelectedRows.Count > 0)
             {
-                loadTable(txtAccName.Text);
+                int accId = CommonTools.ConvertToInt(dgvBankAccounts.SelectedRows[0].Cells[7].Value);
+                issueBankStatementController.bankAccount = tableContext.BankAccounts.Single(x => x.Id == accId);
+                IssueBankStatementFromStep2 tempForm = new IssueBankStatementFromStep2(formController, issueBankStatementController);
+                formController.AddFormToConentPanel(tempForm);
+            }
+            else
+            {
+                MessageBox.Show("Please Select atleast one Account");
             }
         }
 
@@ -66,26 +88,6 @@ namespace PLApp.Forms.ImportBankStatement
             {
                 formController.mainTabControll(TAB_ACTION.REMOVE);
             }
-        }
-
-        private void btnAction_Click(object sender, EventArgs e)
-        {
-            if (dgvBankAccounts.SelectedRows.Count > 0)
-            {
-                int accId = CommonTools.ConvertToInt(dgvBankAccounts.SelectedRows[0].Cells[7].Value);
-                importBankStatementController.bankAccount = tableContext.BankAccounts.Single(x => x.Id == accId);
-                ImportBankStatementFormStep2 tempForm = new ImportBankStatementFormStep2(formController, importBankStatementController);
-                formController.AddFormToConentPanel(tempForm);
-            }
-            else
-            {
-                MessageBox.Show("Please Select atleast one Account");
-            }
-        }
-
-        private void dgvBankAccounts_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }

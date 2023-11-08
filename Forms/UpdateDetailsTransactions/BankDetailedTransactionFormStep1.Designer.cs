@@ -1,6 +1,6 @@
-﻿namespace PLApp.Forms.ImportBankStatement
+﻿namespace PLApp.Forms.UpdateDetailsTransactions
 {
-    partial class ImportBankStatementFormStep1
+    partial class BankDetailedTransactionFormStep1
     {
         /// <summary>
         /// Required designer variable.
@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            txtAccName = new TextBox();
-            label2 = new Label();
+            btnClose = new Button();
+            btnAction = new Button();
             dgvBankAccounts = new DataGridView();
             Column1 = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
@@ -40,8 +40,8 @@
             Column6 = new DataGridViewTextBoxColumn();
             Column7 = new DataGridViewTextBoxColumn();
             id = new DataGridViewTextBoxColumn();
-            btnAction = new Button();
-            button1 = new Button();
+            txtAccName = new TextBox();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvBankAccounts).BeginInit();
             SuspendLayout();
             // 
@@ -51,26 +51,30 @@
             label1.Location = new Point(3, 11);
             label1.Name = "label1";
             label1.Size = new Size(1272, 32);
-            label1.TabIndex = 2;
+            label1.TabIndex = 27;
             label1.Text = "Select Bank Account";
             label1.TextAlign = ContentAlignment.MiddleCenter;
+            label1.Click += label1_Click;
             // 
-            // txtAccName
+            // btnClose
             // 
-            txtAccName.Location = new Point(320, 57);
-            txtAccName.Name = "txtAccName";
-            txtAccName.Size = new Size(159, 23);
-            txtAccName.TabIndex = 23;
-            txtAccName.KeyDown += txtAccName_KeyDown;
+            btnClose.Location = new Point(153, 542);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new Size(79, 26);
+            btnClose.TabIndex = 36;
+            btnClose.Text = "Close";
+            btnClose.UseVisualStyleBackColor = true;
+            btnClose.Click += btnClose_Click;
             // 
-            // label2
+            // btnAction
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(67, 60);
-            label2.Name = "label2";
-            label2.Size = new Size(251, 15);
-            label2.TabIndex = 22;
-            label2.Text = "Search Account Name(Press Enter to Search):";
+            btnAction.Location = new Point(68, 542);
+            btnAction.Name = "btnAction";
+            btnAction.Size = new Size(79, 26);
+            btnAction.TabIndex = 35;
+            btnAction.Text = "Next";
+            btnAction.UseVisualStyleBackColor = true;
+            btnAction.Click += btnAction_Click;
             // 
             // dgvBankAccounts
             // 
@@ -78,7 +82,7 @@
             dgvBankAccounts.BackgroundColor = Color.White;
             dgvBankAccounts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvBankAccounts.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column6, Column7, id });
-            dgvBankAccounts.Location = new Point(67, 90);
+            dgvBankAccounts.Location = new Point(68, 109);
             dgvBankAccounts.MultiSelect = false;
             dgvBankAccounts.Name = "dgvBankAccounts";
             dgvBankAccounts.ReadOnly = true;
@@ -86,8 +90,7 @@
             dgvBankAccounts.RowTemplate.Height = 25;
             dgvBankAccounts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvBankAccounts.Size = new Size(1134, 427);
-            dgvBankAccounts.TabIndex = 24;
-            dgvBankAccounts.CellContentClick += dgvBankAccounts_CellContentClick;
+            dgvBankAccounts.TabIndex = 34;
             // 
             // Column1
             // 
@@ -151,33 +154,30 @@
             id.ReadOnly = true;
             id.Visible = false;
             // 
-            // btnAction
+            // txtAccName
             // 
-            btnAction.Location = new Point(67, 523);
-            btnAction.Name = "btnAction";
-            btnAction.Size = new Size(79, 26);
-            btnAction.TabIndex = 25;
-            btnAction.Text = "Next";
-            btnAction.UseVisualStyleBackColor = true;
-            btnAction.Click += btnAction_Click;
+            txtAccName.Location = new Point(321, 76);
+            txtAccName.Name = "txtAccName";
+            txtAccName.Size = new Size(159, 23);
+            txtAccName.TabIndex = 33;
+            txtAccName.KeyDown += txtAccName_KeyDown;
             // 
-            // button1
+            // label2
             // 
-            button1.Location = new Point(152, 523);
-            button1.Name = "button1";
-            button1.Size = new Size(79, 26);
-            button1.TabIndex = 26;
-            button1.Text = "Close";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            label2.AutoSize = true;
+            label2.Location = new Point(68, 79);
+            label2.Name = "label2";
+            label2.Size = new Size(251, 15);
+            label2.TabIndex = 32;
+            label2.Text = "Search Account Name(Press Enter to Search):";
             // 
-            // ImportBankStatementFormStep1
+            // BankDetailedTransactionFormStep1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1271, 645);
-            Controls.Add(button1);
+            Controls.Add(btnClose);
             Controls.Add(btnAction);
             Controls.Add(dgvBankAccounts);
             Controls.Add(txtAccName);
@@ -186,9 +186,9 @@
             Font = new Font("Calibri", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             ForeColor = Color.DimGray;
             FormBorderStyle = FormBorderStyle.None;
-            Name = "ImportBankStatementFormStep1";
-            Text = "ImportBankStatementFormStep1";
-            Load += ImportBankStatementFormStep1_Load;
+            Name = "BankDetailedTransactionFormStep1";
+            Text = "BankDetailedTransactionFormStep1";
+            Load += BankDetailedTransactionFormStep1_Load;
             ((System.ComponentModel.ISupportInitialize)dgvBankAccounts).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -197,8 +197,8 @@
         #endregion
 
         private Label label1;
-        private TextBox txtAccName;
-        private Label label2;
+        private Button btnClose;
+        private Button btnAction;
         private DataGridView dgvBankAccounts;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column2;
@@ -208,7 +208,7 @@
         private DataGridViewTextBoxColumn Column6;
         private DataGridViewTextBoxColumn Column7;
         private DataGridViewTextBoxColumn id;
-        private Button btnAction;
-        private Button button1;
+        private TextBox txtAccName;
+        private Label label2;
     }
 }

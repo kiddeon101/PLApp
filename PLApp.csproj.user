@@ -13,6 +13,24 @@
     <Compile Update="Forms\ImportBankStatement\ImportBankStatementFormStep2.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\IssueBankStatement\IssueBankStatementFormStep1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\IssueBankStatement\IssueBankStatementFromStep2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\UpdateDetailsTransactions\BankDetailedTransactionFormStep1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\UpdateDetailsTransactions\BankDetailedTransactionFromStep2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\UpdateDetailsTransactions\BankDetailedTransactionFromStep3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\UpdateDetailsTransactions\DetailedTransactionInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="PLApp.cs">
       <SubType>Form</SubType>
     </Compile>

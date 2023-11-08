@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,6 +45,10 @@ namespace PLApp.Constants
         }
         internal static DateTime ConvertToDate(object date)
         {
+            if(date == null)
+            {
+                 return DateTime.Parse("01/01/0001");
+            }
             try
             {
                 DateTime time = DateTime.Parse(date.ToString());
@@ -69,7 +74,7 @@ namespace PLApp.Constants
             double dblParsed = 0;
             try
             {
-                if (double.TryParse(dbl.ToString(), out dblParsed))
+                if (dbl != null && double.TryParse(dbl.ToString(), out dblParsed))
                 {
                     return dblParsed;
                 }
@@ -89,7 +94,7 @@ namespace PLApp.Constants
             int dblParsed = 0;
             try
             {
-                if (int.TryParse(dbl.ToString(), out dblParsed))
+                if (dbl != null &&  int.TryParse(dbl.ToString(), out dblParsed))
                 {
                     return dblParsed;
                 }
@@ -108,7 +113,7 @@ namespace PLApp.Constants
             bool blc = false;
             try
             {
-                if (bool.TryParse(bl.ToString(), out blc))
+                if (bl != null &&  bool.TryParse(bl.ToString(), out blc))
                 {
                     return blc;
                 }

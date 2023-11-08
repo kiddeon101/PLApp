@@ -28,12 +28,50 @@ namespace PLApp.Entity.TableEntity
         public double outwardAmount { get; set; }
         public double inwardAmount { get; set; }
 
+        public int statementType { get; set; }
+
+
         public int bankAccountId { get; set; }
         public BankAccount bankAccount { get; set; }
+
+        public ICollection<BankDetailedTransaction> BankDetailedTransactions { get; set; }
 
         [NotMapped]
         public Boolean hasConflict { get; set; }
 
+        public double getAddedValue()
+        {
+            return inwardAmount - outwardAmount;
+        }
 
+        public string isInOut()
+        {
+            if(outwardAmount ==0 && inwardAmount > 0)
+            {
+                return "In";
+            }else if(outwardAmount > 0 && inwardAmount == 0)
+            {
+                return "Out";
+            }
+            else
+            {
+                return "Unvalidated";
+            }
+        }
+        public double getAmountInOut()
+        {
+            if(isInOut() == "In")
+            {
+                return inwardAmount;
+            }
+            else if (isInOut() == "Out")
+            {
+                return outwardAmount;
+            }
+            else
+            {
+                return 0;
+            }
+        }
     }
 }

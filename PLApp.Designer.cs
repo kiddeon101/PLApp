@@ -99,6 +99,7 @@
             btnOpenPriceOffer.TabIndex = 26;
             btnOpenPriceOffer.Text = "Update Detailed Transaction List";
             btnOpenPriceOffer.UseVisualStyleBackColor = true;
+            btnOpenPriceOffer.Click += btnOpenPriceOffer_Click;
             // 
             // btnOpenInvoice
             // 
@@ -108,6 +109,7 @@
             btnOpenInvoice.TabIndex = 25;
             btnOpenInvoice.Text = "Issue Bank Account Statement";
             btnOpenInvoice.UseVisualStyleBackColor = true;
+            btnOpenInvoice.Click += btnOpenInvoice_Click;
             // 
             // btnUpdateTaskList
             // 

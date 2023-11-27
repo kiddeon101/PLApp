@@ -7,6 +7,9 @@
     <Compile Update="Forms\BankAccountManagement\BankAccManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\DBBackupRestore\DBBackupRestoreForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\ImportBankStatement\ImportBankStatementFormStep1.cs">
       <SubType>Form</SubType>
     </Compile>

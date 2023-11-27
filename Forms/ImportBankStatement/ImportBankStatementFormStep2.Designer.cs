@@ -30,6 +30,16 @@
         {
             label1 = new Label();
             dgvBankTransactions = new DataGridView();
+            Column1 = new DataGridViewTextBoxColumn();
+            Column2 = new DataGridViewTextBoxColumn();
+            Column3 = new DataGridViewTextBoxColumn();
+            Column4 = new DataGridViewTextBoxColumn();
+            Column5 = new DataGridViewTextBoxColumn();
+            Column6 = new DataGridViewTextBoxColumn();
+            Column7 = new DataGridViewTextBoxColumn();
+            Column8 = new DataGridViewTextBoxColumn();
+            Column9 = new DataGridViewTextBoxColumn();
+            Column10 = new DataGridViewComboBoxColumn();
             label2 = new Label();
             label3 = new Label();
             txtExcelPath = new TextBox();
@@ -43,16 +53,8 @@
             lblAccountNumber = new Label();
             sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
             cmbImportType = new ComboBox();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
-            Column4 = new DataGridViewTextBoxColumn();
-            Column5 = new DataGridViewTextBoxColumn();
-            Column6 = new DataGridViewTextBoxColumn();
-            Column7 = new DataGridViewTextBoxColumn();
-            Column8 = new DataGridViewTextBoxColumn();
-            Column9 = new DataGridViewTextBoxColumn();
-            Column10 = new DataGridViewComboBoxColumn();
+            label6 = new Label();
+            lblCurrency = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvBankTransactions).BeginInit();
             SuspendLayout();
             // 
@@ -82,121 +84,6 @@
             dgvBankTransactions.TabIndex = 4;
             dgvBankTransactions.CellClick += dgvBankTransactions_CellClick;
             dgvBankTransactions.CellValueChanged += dgvBankTransactions_CellValueChanged;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(30, 180);
-            label2.Name = "label2";
-            label2.Size = new Size(162, 15);
-            label2.TabIndex = 17;
-            label2.Text = "Please Verify Imported Data.";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(30, 66);
-            label3.Name = "label3";
-            label3.Size = new Size(119, 15);
-            label3.TabIndex = 18;
-            label3.Text = "Bank Statement Path";
-            // 
-            // txtExcelPath
-            // 
-            txtExcelPath.Location = new Point(155, 58);
-            txtExcelPath.Name = "txtExcelPath";
-            txtExcelPath.Size = new Size(273, 23);
-            txtExcelPath.TabIndex = 22;
-            // 
-            // btnLoadData
-            // 
-            btnLoadData.Location = new Point(112, 84);
-            btnLoadData.Name = "btnLoadData";
-            btnLoadData.Size = new Size(76, 27);
-            btnLoadData.TabIndex = 23;
-            btnLoadData.Text = "Load Data";
-            btnLoadData.UseVisualStyleBackColor = true;
-            btnLoadData.Click += btnLoadData_Click;
-            // 
-            // btnBrowse
-            // 
-            btnBrowse.Location = new Point(30, 84);
-            btnBrowse.Name = "btnBrowse";
-            btnBrowse.Size = new Size(76, 27);
-            btnBrowse.TabIndex = 24;
-            btnBrowse.Text = "Browse";
-            btnBrowse.UseVisualStyleBackColor = true;
-            btnBrowse.Click += btnBrowse_Click;
-            // 
-            // btnStartImport
-            // 
-            btnStartImport.Location = new Point(30, 517);
-            btnStartImport.Name = "btnStartImport";
-            btnStartImport.Size = new Size(128, 36);
-            btnStartImport.TabIndex = 25;
-            btnStartImport.Text = "Start  Import";
-            btnStartImport.UseVisualStyleBackColor = true;
-            btnStartImport.Click += btnStartImport_Click;
-            // 
-            // btnClose
-            // 
-            btnClose.Location = new Point(164, 517);
-            btnClose.Name = "btnClose";
-            btnClose.Size = new Size(72, 36);
-            btnClose.TabIndex = 26;
-            btnClose.Text = "Close";
-            btnClose.UseVisualStyleBackColor = true;
-            btnClose.Click += btnClose_Click;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(30, 131);
-            label4.Name = "label4";
-            label4.Size = new Size(88, 15);
-            label4.TabIndex = 27;
-            label4.Text = "Account Name:";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(30, 151);
-            label5.Name = "label5";
-            label5.Size = new Size(71, 15);
-            label5.TabIndex = 28;
-            label5.Text = "Bank Name:";
-            // 
-            // lblAccountName
-            // 
-            lblAccountName.AutoSize = true;
-            lblAccountName.Location = new Point(134, 131);
-            lblAccountName.Name = "lblAccountName";
-            lblAccountName.Size = new Size(88, 15);
-            lblAccountName.TabIndex = 29;
-            lblAccountName.Text = "Account Name:";
-            // 
-            // lblAccountNumber
-            // 
-            lblAccountNumber.AutoSize = true;
-            lblAccountNumber.Location = new Point(136, 151);
-            lblAccountNumber.Name = "lblAccountNumber";
-            lblAccountNumber.Size = new Size(88, 15);
-            lblAccountNumber.TabIndex = 30;
-            lblAccountNumber.Text = "Account Name:";
-            // 
-            // sqlCommand1
-            // 
-            sqlCommand1.CommandTimeout = 30;
-            sqlCommand1.EnableOptimizedParameterBinding = false;
-            // 
-            // cmbImportType
-            // 
-            cmbImportType.FormattingEnabled = true;
-            cmbImportType.Items.AddRange(new object[] { "China Bank Account", "USD Account" });
-            cmbImportType.Location = new Point(455, 58);
-            cmbImportType.Name = "cmbImportType";
-            cmbImportType.Size = new Size(121, 23);
-            cmbImportType.TabIndex = 31;
             // 
             // Column1
             // 
@@ -270,12 +157,147 @@
             Column10.SortMode = DataGridViewColumnSortMode.Automatic;
             Column10.Width = 80;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(30, 180);
+            label2.Name = "label2";
+            label2.Size = new Size(162, 15);
+            label2.TabIndex = 17;
+            label2.Text = "Please Verify Imported Data.";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(30, 66);
+            label3.Name = "label3";
+            label3.Size = new Size(119, 15);
+            label3.TabIndex = 18;
+            label3.Text = "Bank Statement Path";
+            // 
+            // txtExcelPath
+            // 
+            txtExcelPath.Location = new Point(155, 58);
+            txtExcelPath.Name = "txtExcelPath";
+            txtExcelPath.Size = new Size(273, 23);
+            txtExcelPath.TabIndex = 22;
+            // 
+            // btnLoadData
+            // 
+            btnLoadData.Location = new Point(112, 84);
+            btnLoadData.Name = "btnLoadData";
+            btnLoadData.Size = new Size(76, 27);
+            btnLoadData.TabIndex = 23;
+            btnLoadData.Text = "Load Data";
+            btnLoadData.UseVisualStyleBackColor = true;
+            btnLoadData.Click += btnLoadData_Click;
+            // 
+            // btnBrowse
+            // 
+            btnBrowse.Location = new Point(30, 84);
+            btnBrowse.Name = "btnBrowse";
+            btnBrowse.Size = new Size(76, 27);
+            btnBrowse.TabIndex = 24;
+            btnBrowse.Text = "Browse";
+            btnBrowse.UseVisualStyleBackColor = true;
+            btnBrowse.Click += btnBrowse_Click;
+            // 
+            // btnStartImport
+            // 
+            btnStartImport.Location = new Point(30, 517);
+            btnStartImport.Name = "btnStartImport";
+            btnStartImport.Size = new Size(128, 36);
+            btnStartImport.TabIndex = 25;
+            btnStartImport.Text = "Start  Import";
+            btnStartImport.UseVisualStyleBackColor = true;
+            btnStartImport.Click += btnStartImport_Click;
+            // 
+            // btnClose
+            // 
+            btnClose.Location = new Point(164, 517);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new Size(72, 36);
+            btnClose.TabIndex = 26;
+            btnClose.Text = "Close";
+            btnClose.UseVisualStyleBackColor = true;
+            btnClose.Click += btnClose_Click;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(30, 114);
+            label4.Name = "label4";
+            label4.Size = new Size(88, 15);
+            label4.TabIndex = 27;
+            label4.Text = "Account Name:";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(30, 132);
+            label5.Name = "label5";
+            label5.Size = new Size(71, 15);
+            label5.TabIndex = 28;
+            label5.Text = "Bank Name:";
+            // 
+            // lblAccountName
+            // 
+            lblAccountName.AutoSize = true;
+            lblAccountName.Location = new Point(134, 114);
+            lblAccountName.Name = "lblAccountName";
+            lblAccountName.Size = new Size(88, 15);
+            lblAccountName.TabIndex = 29;
+            lblAccountName.Text = "Account Name:";
+            // 
+            // lblAccountNumber
+            // 
+            lblAccountNumber.AutoSize = true;
+            lblAccountNumber.Location = new Point(134, 132);
+            lblAccountNumber.Name = "lblAccountNumber";
+            lblAccountNumber.Size = new Size(88, 15);
+            lblAccountNumber.TabIndex = 30;
+            lblAccountNumber.Text = "Account Name:";
+            // 
+            // sqlCommand1
+            // 
+            sqlCommand1.CommandTimeout = 30;
+            sqlCommand1.EnableOptimizedParameterBinding = false;
+            // 
+            // cmbImportType
+            // 
+            cmbImportType.FormattingEnabled = true;
+            cmbImportType.Items.AddRange(new object[] { "China Bank Account", "USD Account" });
+            cmbImportType.Location = new Point(455, 58);
+            cmbImportType.Name = "cmbImportType";
+            cmbImportType.Size = new Size(121, 23);
+            cmbImportType.TabIndex = 31;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(30, 150);
+            label6.Name = "label6";
+            label6.Size = new Size(59, 15);
+            label6.TabIndex = 32;
+            label6.Text = "Currency:";
+            // 
+            // lblCurrency
+            // 
+            lblCurrency.AutoSize = true;
+            lblCurrency.Location = new Point(134, 150);
+            lblCurrency.Name = "lblCurrency";
+            lblCurrency.Size = new Size(88, 15);
+            lblCurrency.TabIndex = 33;
+            lblCurrency.Text = "Account Name:";
+            // 
             // ImportBankStatementFormStep2
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1271, 645);
+            Controls.Add(lblCurrency);
+            Controls.Add(label6);
             Controls.Add(cmbImportType);
             Controls.Add(lblAccountNumber);
             Controls.Add(lblAccountName);
@@ -328,5 +350,7 @@
         private DataGridViewTextBoxColumn Column8;
         private DataGridViewTextBoxColumn Column9;
         private DataGridViewComboBoxColumn Column10;
+        private Label label6;
+        private Label lblCurrency;
     }
 }

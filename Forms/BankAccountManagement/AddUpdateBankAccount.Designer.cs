@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             txtOpenBalanceAmount = new TextBox();
-            txtAccCurrency = new TextBox();
             txtBankName = new TextBox();
             txtAccName = new TextBox();
             label6 = new Label();
@@ -50,13 +49,6 @@
             txtOpenBalanceAmount.Name = "txtOpenBalanceAmount";
             txtOpenBalanceAmount.Size = new Size(137, 23);
             txtOpenBalanceAmount.TabIndex = 23;
-            // 
-            // txtAccCurrency
-            // 
-            txtAccCurrency.Location = new Point(236, 139);
-            txtAccCurrency.Name = "txtAccCurrency";
-            txtAccCurrency.Size = new Size(60, 23);
-            txtAccCurrency.TabIndex = 22;
             // 
             // txtBankName
             // 
@@ -158,7 +150,7 @@
             // 
             cmbCurrency.FormattingEnabled = true;
             cmbCurrency.Items.AddRange(new object[] { "USD", "CNY" });
-            cmbCurrency.Location = new Point(302, 139);
+            cmbCurrency.Location = new Point(236, 139);
             cmbCurrency.Name = "cmbCurrency";
             cmbCurrency.Size = new Size(121, 23);
             cmbCurrency.TabIndex = 28;
@@ -174,7 +166,6 @@
             Controls.Add(lblTitle);
             Controls.Add(btnCancel);
             Controls.Add(txtOpenBalanceAmount);
-            Controls.Add(txtAccCurrency);
             Controls.Add(txtBankName);
             Controls.Add(txtAccName);
             Controls.Add(label6);
@@ -194,7 +185,6 @@
 
         #endregion
         private TextBox txtOpenBalanceAmount;
-        private TextBox txtAccCurrency;
         private TextBox txtBankName;
         private TextBox txtAccName;
         private Label label6;

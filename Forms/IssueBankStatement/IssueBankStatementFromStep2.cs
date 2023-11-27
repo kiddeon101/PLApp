@@ -47,7 +47,7 @@ namespace PLApp.Forms.IssueBankStatement
             lblOpenBalance.Text = currentBalance.ToString();
             lblCloseBalance.Text = issueBankStatementController.getClosingBalance(dtpDateFrom.Value, dtpDateTo.Value).ToString();
 
-
+            dgvBankTransactions.Rows.Clear();
             foreach (BankTransaction bankTransaction in bankTransactions)
             {
                 if (bankTransaction.isInOut() == "In")

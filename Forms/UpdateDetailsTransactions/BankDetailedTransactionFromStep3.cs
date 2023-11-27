@@ -38,12 +38,12 @@ namespace PLApp.Forms.UpdateDetailsTransactions
             if (detailedTransactionController.bankTransaction.isInOut().ToLower() == "in")
             {
                 lblTransactionType.Text = "Incomming";
-                lblTransactionAmount.Text = detailedTransactionController.bankTransaction.inwardAmount.ToString();
+                lblTransactionAmount.Text =Math.Round( detailedTransactionController.bankTransaction.inwardAmount,2).ToString();
             }
             else
             {
                 lblTransactionType.Text = "Outgoing";
-                lblTransactionAmount.Text = detailedTransactionController.bankTransaction.outwardAmount.ToString();
+                lblTransactionAmount.Text = Math.Round(detailedTransactionController.bankTransaction.outwardAmount,2).ToString();
             }
 
             loadTable(detailedTransactionController.bankTransaction.Id);
@@ -65,7 +65,7 @@ namespace PLApp.Forms.UpdateDetailsTransactions
             }
 
             sumOfDetailedTransactions = bankDetailedTransactions.Select(i => i.amount).Sum();
-            lblSumDetailedTransaction.Text = sumOfDetailedTransactions.ToString();
+            lblSumDetailedTransaction.Text =Math.Round(sumOfDetailedTransactions,2).ToString();
         }
 
         private void label1_Click(object sender, EventArgs e)

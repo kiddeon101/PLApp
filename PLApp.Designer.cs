@@ -30,6 +30,7 @@
         {
             tbcMain = new TabControl();
             tbpDashboard = new TabPage();
+            button1 = new Button();
             label1 = new Label();
             btnReports = new Button();
             btnOpenPriceOffer = new Button();
@@ -59,6 +60,7 @@
             // tbpDashboard
             // 
             tbpDashboard.BackColor = Color.White;
+            tbpDashboard.Controls.Add(button1);
             tbpDashboard.Controls.Add(label1);
             tbpDashboard.Controls.Add(btnReports);
             tbpDashboard.Controls.Add(btnOpenPriceOffer);
@@ -71,6 +73,16 @@
             tbpDashboard.Size = new Size(1264, 699);
             tbpDashboard.TabIndex = 0;
             tbpDashboard.Text = "Dasboard";
+            // 
+            // button1
+            // 
+            button1.Location = new Point(8, 633);
+            button1.Name = "button1";
+            button1.Size = new Size(136, 58);
+            button1.TabIndex = 30;
+            button1.Text = "Backup and Restore Database";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // label1
             // 
@@ -90,6 +102,7 @@
             btnReports.TabIndex = 27;
             btnReports.Text = "Issue Detailed Transaction List";
             btnReports.UseVisualStyleBackColor = true;
+            btnReports.Click += btnReports_Click;
             // 
             // btnOpenPriceOffer
             // 
@@ -193,5 +206,6 @@
         private Button btnUpdateCompanyInformation;
         private Label lblContentTitle;
         private Panel pnlContent;
+        private Button button1;
     }
 }

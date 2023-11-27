@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,11 +51,20 @@ namespace PLApp.Forms.UpdateDetailsTransactions
                 lblTitle.Text = "Add Detailed Transaction Info";
                 btnAction.Text = "Add";
                 lblTransactionType.Text = detailedTransactionController.bankTransaction.isInOut() == "In" ? "Incomming" : "Outgoing";
-
+                cmbTransactionType.SelectedIndex = 0;
             }
             else
             {
                 //Transaction is Update
+                if (detailedTransaction.isIncomming)
+                {
+                    cmbTransactionType.SelectedIndex = 0;
+                }
+                else
+                {
+                    cmbTransactionType.SelectedIndex = 1;
+                }
+
                 int detailedTransactionId = CommonTools.ConvertToInt(dataRow.Cells[9].Value);
                 this.detailedTransaction = tableContext.BankDetailedTransactions.Single(i => i.Id == detailedTransactionId);
                 lblTitle.Text = "Update Detailed Transaction Info";
@@ -63,7 +73,9 @@ namespace PLApp.Forms.UpdateDetailsTransactions
                 txtCategory.Text = detailedTransaction.category;
                 txtAmount.Text = detailedTransaction.amount.ToString();
                 dtpYear.Value = DateTime.Parse("01/01/" + detailedTransaction.accountYear);
-                dtpYear.Value = DateTime.Parse("01/" + detailedTransaction.accountMonth + "/" + DateTime.Now.Year);
+                string format = "d/M/yyyy";
+                DateTime dtTemp = DateTime.ParseExact("01/" + detailedTransaction.accountMonth + "/" + DateTime.Now.Year, format, CultureInfo.InvariantCulture);
+                dtpMonth.Value = dtTemp;
                 txtCustomer.Text = detailedTransaction.customer;
                 txtProjectNum.Text = detailedTransaction.projectNum;
                 txtInvoiceNum.Text = detailedTransaction.invoiceNum;
@@ -78,16 +90,18 @@ namespace PLApp.Forms.UpdateDetailsTransactions
             {
                 //Add the data
                 BankDetailedTransaction bankDetailedTransaction = new BankDetailedTransaction();
-                if (lblTransactionType.Text == "Incomming")
+                if (cmbTransactionType.SelectedIndex == 0)
                 {
                     bankDetailedTransaction.isIncomming = true;
+                    bankDetailedTransaction.amount = CommonTools.ConvertToDouble(txtAmount.Text);
                 }
                 else
                 {
                     bankDetailedTransaction.isIncomming = false;
+                    bankDetailedTransaction.amount = CommonTools.ConvertToDouble(txtAmount.Text) * -1;
                 }
                 bankDetailedTransaction.category = txtCategory.Text;
-                bankDetailedTransaction.amount = CommonTools.ConvertToDouble(txtAmount.Text);
+
                 bankDetailedTransaction.accountYear = dtpYear.Value.Year;
                 bankDetailedTransaction.accountMonth = dtpMonth.Value.Month;
                 bankDetailedTransaction.customer = CommonTools.ConvertToString(txtCustomer.Text);

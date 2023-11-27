@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -68,6 +69,28 @@ namespace PLApp.Constants
         }
 
 
+        internal static DateTime dateParseBeginning(DateTime dateTime)
+        {
+            string format = "d/M/yyyy";
+            DateTime dtBeginning = DateTime.ParseExact(string.Format("{0}/{1}/{2}", 1, dateTime.Month, dateTime.Year), format, CultureInfo.InvariantCulture);
+            return GetDateMin(dtBeginning);
+        }
+
+        internal static DateTime dateParseEnding(DateTime dateString)
+        {
+            string format = "d/M/yyyy";
+            DateTime dtBeginning = DateTime.ParseExact(string.Format("{0}/{1}/{2}", DateTime.DaysInMonth(dateString.Year, dateString.Month), dateString.Month, dateString.Year), format, CultureInfo.InvariantCulture);
+            return GetDateMax(dtBeginning);
+        }
+
+        internal static DateTime GetDateMin(DateTime dateTime)
+        {
+            return dateTime.Date;
+        }
+        internal static DateTime GetDateMax(DateTime dateTime)
+        {
+            return dateTime.Date.AddHours(23).AddMinutes(59);
+        }
 
         internal static double ConvertToDouble(object dbl)
         {

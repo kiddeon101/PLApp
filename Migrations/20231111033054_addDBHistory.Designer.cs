@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PLApp.Entity;
 
@@ -11,9 +12,11 @@ using PLApp.Entity;
 namespace PLApp.Migrations
 {
     [DbContext(typeof(TableContext))]
-    partial class TableContextModelSnapshot : ModelSnapshot
+    [Migration("20231111033054_addDBHistory")]
+    partial class addDBHistory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

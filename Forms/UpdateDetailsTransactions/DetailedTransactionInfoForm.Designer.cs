@@ -50,12 +50,14 @@
             btnAction = new Button();
             txtAmount = new TextBox();
             txtCategory = new TextBox();
+            sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
+            cmbTransactionType = new ComboBox();
             SuspendLayout();
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(51, 58);
+            label2.Location = new Point(51, 55);
             label2.Name = "label2";
             label2.Size = new Size(101, 15);
             label2.TabIndex = 36;
@@ -211,11 +213,12 @@
             // lblTransactionType
             // 
             lblTransactionType.AutoSize = true;
-            lblTransactionType.Location = new Point(198, 59);
+            lblTransactionType.Location = new Point(500, 55);
             lblTransactionType.Name = "lblTransactionType";
             lblTransactionType.Size = new Size(88, 15);
             lblTransactionType.TabIndex = 57;
             lblTransactionType.Text = "Transaction Id:";
+            lblTransactionType.Visible = false;
             // 
             // btnAction
             // 
@@ -241,12 +244,27 @@
             txtCategory.Size = new Size(125, 23);
             txtCategory.TabIndex = 60;
             // 
+            // sqlCommand1
+            // 
+            sqlCommand1.CommandTimeout = 30;
+            sqlCommand1.EnableOptimizedParameterBinding = false;
+            // 
+            // cmbTransactionType
+            // 
+            cmbTransactionType.FormattingEnabled = true;
+            cmbTransactionType.Items.AddRange(new object[] { "Incomming", "Outgoing" });
+            cmbTransactionType.Location = new Point(200, 51);
+            cmbTransactionType.Name = "cmbTransactionType";
+            cmbTransactionType.Size = new Size(121, 23);
+            cmbTransactionType.TabIndex = 61;
+            // 
             // DetailedTransactionInfoForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(600, 450);
+            Controls.Add(cmbTransactionType);
             Controls.Add(txtCategory);
             Controls.Add(txtAmount);
             Controls.Add(btnAction);
@@ -302,5 +320,7 @@
         private Button btnAction;
         private TextBox txtAmount;
         private TextBox txtCategory;
+        private Microsoft.Data.SqlClient.SqlCommand sqlCommand1;
+        private ComboBox cmbTransactionType;
     }
 }

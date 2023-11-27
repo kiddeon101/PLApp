@@ -45,7 +45,7 @@ namespace PLApp.Forms.BankAccountManagement
                 dtpOpenAccDate.Value = bankAccount.OpenBalanceDate;
 
 
-                if(bankAccount.AccountCurrency.ToLower() == "usd")
+                if (bankAccount.AccountCurrency.ToLower() == "usd")
                 {
                     cmbCurrency.SelectedIndex = 0;
                 }

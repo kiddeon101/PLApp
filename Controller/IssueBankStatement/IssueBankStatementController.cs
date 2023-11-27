@@ -35,9 +35,11 @@ namespace PLApp.Controller.IssueBankStatement
         {
             using(TableContext context = new TableContext())
             {
+                DateTime dateBegin = CommonTools.dateParseBeginning(dateFrom);
+                DateTime dateEnd = CommonTools.dateParseEnding(DateTo);
                 return context.BankTransactions.Where(i => i.bankAccountId == bankAccount.Id &&
-                                               i.transactionDate.Date >= dateFrom.Date &&
-                                               i.transactionDate.Date <= DateTo.Date).ToList();
+                                               i.transactionDate.Date >= dateBegin.Date &&
+                                               i.transactionDate.Date <= dateEnd.Date).ToList();
             }
         }
 
@@ -45,8 +47,9 @@ namespace PLApp.Controller.IssueBankStatement
         {
             using (TableContext context = new TableContext())
             {
+                DateTime dateBegin = CommonTools.dateParseBeginning(dateFrom);
                 double pastTransactionAmount = context.BankTransactions.Where(i => i.bankAccountId == bankAccount.Id &&
-                                                        i.transactionDate.Date < dateFrom.Date).Select(i =>i.getAddedValue()
+                                                        i.transactionDate.Date < dateBegin.Date).Select(i =>i.getAddedValue()
                                                         ).ToList().Sum();
                 return bankAccount.OpenBalanceAmount + pastTransactionAmount;
             }
@@ -56,9 +59,12 @@ namespace PLApp.Controller.IssueBankStatement
         {
             using (TableContext context = new TableContext())
             {
+                DateTime dateBegin = CommonTools.dateParseBeginning(dateFrom);
+                DateTime dateEnd = CommonTools.dateParseEnding(DateTo);
+
                 double TransactionAmount = context.BankTransactions.Where(i => i.bankAccountId == bankAccount.Id &&
-                                               i.transactionDate.Date >= dateFrom.Date &&
-                                               i.transactionDate.Date <= DateTo.Date).Select(i=>i.getAddedValue()).ToList().Sum();
+                                               i.transactionDate.Date >= dateBegin.Date &&
+                                               i.transactionDate.Date <= dateEnd.Date).Select(i=>i.getAddedValue()).ToList().Sum();
                 return getOpenAmount(dateFrom) + TransactionAmount;
             }         
         }
@@ -69,14 +75,16 @@ namespace PLApp.Controller.IssueBankStatement
             worksheet = excelService.GetSheet(COMM_STATEMENT_SHEET);
             worksheet_template = excelService.GetSheet(COMM_STATEMENT_SHEET_TEMPLATE);
 
+            
+
             worksheet.Cells[3, "C"] = "'" + DateTime.Today.ToString("MMM, dd, yyyy");
             worksheet.Cells[3, "E"] = bankAccount.BankName;
             worksheet.Cells[4, "E"] = bankAccount.AccountCurrency;
             worksheet.Cells[6, "D"] = String.Format("{0:0.00}", openBalance); 
             worksheet.Cells[11, "D"] = String.Format("{0:0.00}", closingBalance);
 
-            worksheet.Cells[6, "A"] =String.Format("Statement Open Balance({0}):", dateFrom.ToString("dd/MM/yyyy"));
-            worksheet.Cells[11, "A"] = String.Format("Statement Closing Balance ({0}):",dateTo.ToString("dd/MM/yyyy"));
+            worksheet.Cells[6, "A"] =String.Format("Statement Open Balance({0}):", dateFrom.ToString("MMMM yyyy"));
+            worksheet.Cells[11, "A"] = String.Format("Statement Closing Balance ({0}):",dateTo.ToString("MMMM yyyy"));
 
             int startRow = 9;
             foreach (var bankStatement in bankStatements)

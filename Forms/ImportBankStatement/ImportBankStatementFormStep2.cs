@@ -118,6 +118,7 @@ namespace PLApp.Forms.ImportBankStatement
         {
             lblAccountName.Text = importBankStatementController.bankAccount.AccountName;
             lblAccountNumber.Text = importBankStatementController.bankAccount.BankName;
+            lblCurrency.Text = importBankStatementController.bankAccount.AccountCurrency;
             cmbImportType.SelectedIndex = 0;
         }
 

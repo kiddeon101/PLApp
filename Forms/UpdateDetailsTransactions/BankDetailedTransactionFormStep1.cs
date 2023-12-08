@@ -23,12 +23,14 @@ namespace PLApp.Forms.UpdateDetailsTransactions
         private FormController formController;
         private BankManagementController bankManagementController;
         private BankDetailedTransactionController detailedTransactionController;
+        private IssueBankStatementController issueBankStatementController;
         private TableContext tableContext;
 
         internal BankDetailedTransactionFormStep1(FormController formController)
         {
             bankManagementController = new BankManagementController();
             detailedTransactionController = new BankDetailedTransactionController();
+            issueBankStatementController = new IssueBankStatementController();
             tableContext = new TableContext();
             this.formController = formController;
             InitializeComponent();
@@ -50,7 +52,8 @@ namespace PLApp.Forms.UpdateDetailsTransactions
             dgvBankAccounts.Rows.Clear();
             foreach (BankAccount bankAccount in bankAccounts)
             {
-                dgvBankAccounts.Rows.Add("ACC" + bankAccount.Id.ToString().PadLeft(4, '0'), bankAccount.AccountName, bankAccount.BankName, bankAccount.AccountCurrency, bankAccount.OpenBalanceAmount, bankAccount.OpenBalanceDate.ToString("dd/MM/yyyy"), 0, bankAccount.Id);
+                double currentBalance = Math.Round(issueBankStatementController.getAccountBalance(bankAccount.Id, bankAccount.OpenBalanceAmount), 2);
+                dgvBankAccounts.Rows.Add("ACC" + bankAccount.Id.ToString().PadLeft(4, '0'), bankAccount.AccountName, bankAccount.BankName, bankAccount.AccountCurrency, bankAccount.OpenBalanceAmount, bankAccount.OpenBalanceDate.ToString("dd/MM/yyyy"), currentBalance, bankAccount.Id);
             }
 
         }

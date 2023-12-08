@@ -33,8 +33,8 @@ namespace PLApp.Forms.IssueBankStatement
             lblAccName.Text = issueBankStatementController.bankAccount.AccountName;
             lblBankName.Text = issueBankStatementController.bankAccount.BankName;
 
-            dtpDateFrom.Value = DateTime.Now.AddMonths(-6);
-            dtpDateTo.Value = DateTime.Now;
+            dtpDateFrom.Value = CommonTools.dateParseBeginning(DateTime.Now.AddMonths(-6));
+            dtpDateTo.Value = CommonTools.dateParseBeginning(DateTime.Now);
         }
 
 
@@ -42,7 +42,7 @@ namespace PLApp.Forms.IssueBankStatement
         {
             List<BankTransaction> bankTransactions = new List<BankTransaction>();
             bankTransactions = issueBankStatementController.getBankStatementBaseFromDate(dtpDateFrom.Value, dtpDateTo.Value);
-
+            dtpDateFrom.Value.ToString("MMMM yyyy");
             double currentBalance = issueBankStatementController.getOpenAmount(dtpDateFrom.Value);
             lblOpenBalance.Text = currentBalance.ToString();
             lblCloseBalance.Text = issueBankStatementController.getClosingBalance(dtpDateFrom.Value, dtpDateTo.Value).ToString();
@@ -59,7 +59,7 @@ namespace PLApp.Forms.IssueBankStatement
                     currentBalance = currentBalance - bankTransaction.getAmountInOut();
                 }
 
-                dgvBankTransactions.Rows.Add(bankTransaction.Id, bankTransaction.transactionDate.ToString("dd/MM/yyyy"), bankTransaction.isInOut(), bankTransaction.getAmountInOut(), bankTransaction.details, String.Format("{0:0.00}", currentBalance), bankTransaction.Id);
+                dgvBankTransactions.Rows.Add(bankTransaction.Id, bankTransaction.transactionDate.ToString("dd/MM/yyyy"), bankTransaction.isInOut(), bankTransaction.getAmountInOut(), bankTransaction.recipientName, bankTransaction.recipientAccountNum, bankTransaction.details, String.Format("{0:0.00}", currentBalance), bankTransaction.Id);
             }
         }
 
@@ -76,11 +76,13 @@ namespace PLApp.Forms.IssueBankStatement
                     {
                         BankStatementView bankStatement = new BankStatementView();
                         bankStatement.id = row.Cells[0].Value.ToString();
-                        bankStatement.transactionDate = CommonTools.ConvertToDate(row.Cells[1].Value);
+                        bankStatement.transactionDate = CommonTools.ConvertToDateExact(row.Cells[1].Value);
                         bankStatement.inOut = row.Cells[2].Value.ToString();
                         bankStatement.amount = CommonTools.ConvertToDouble(row.Cells[3].Value);
-                        bankStatement.details = row.Cells[4].Value.ToString();
-                        bankStatement.balace = CommonTools.ConvertToDouble(row.Cells[5].Value);
+                        bankStatement.recipientName = row.Cells[4].Value.ToString();
+                        bankStatement.recipientAccount = row.Cells[5].Value.ToString();
+                        bankStatement.details = row.Cells[6].Value.ToString();
+                        bankStatement.balace = CommonTools.ConvertToDouble(row.Cells[7].Value);
 
                         bankStatements.Add(bankStatement);
                     }

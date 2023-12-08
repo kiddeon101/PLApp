@@ -30,6 +30,7 @@
         {
             tbcMain = new TabControl();
             tbpDashboard = new TabPage();
+            label2 = new Label();
             button1 = new Button();
             label1 = new Label();
             btnReports = new Button();
@@ -60,6 +61,7 @@
             // tbpDashboard
             // 
             tbpDashboard.BackColor = Color.White;
+            tbpDashboard.Controls.Add(label2);
             tbpDashboard.Controls.Add(button1);
             tbpDashboard.Controls.Add(label1);
             tbpDashboard.Controls.Add(btnReports);
@@ -73,6 +75,16 @@
             tbpDashboard.Size = new Size(1264, 699);
             tbpDashboard.TabIndex = 0;
             tbpDashboard.Text = "Dasboard";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Calibri", 8.25F, FontStyle.Italic, GraphicsUnit.Point);
+            label2.Location = new Point(1174, 678);
+            label2.Name = "label2";
+            label2.Size = new Size(81, 13);
+            label2.TabIndex = 31;
+            label2.Text = "PLApp v.081223";
             // 
             // button1
             // 
@@ -189,6 +201,7 @@
             Load += PLApp_Load;
             tbcMain.ResumeLayout(false);
             tbpDashboard.ResumeLayout(false);
+            tbpDashboard.PerformLayout();
             tbpContent.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -207,5 +220,6 @@
         private Label lblContentTitle;
         private Panel pnlContent;
         private Button button1;
+        private Label label2;
     }
 }

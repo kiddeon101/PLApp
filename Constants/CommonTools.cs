@@ -44,6 +44,23 @@ namespace PLApp.Constants
 
             return (int)rounded;
         }
+
+
+        internal static DateTime ConvertToDateExact(object date)
+        {
+            try
+            {
+                string format = "d/M/yyyy";
+                DateTime dtBeginning = DateTime.ParseExact(date.ToString(), format, CultureInfo.InvariantCulture);
+                return dtBeginning;
+            }
+            catch (Exception ex)
+            {
+                return DateTime.Parse("01/01/0001");
+            }
+            
+        }
+
         internal static DateTime ConvertToDate(object date)
         {
             if(date == null)
@@ -57,6 +74,7 @@ namespace PLApp.Constants
             }
             catch (Exception)
             {
+                
                 try
                 {
                     return DateTime.FromOADate(Convert.ToDouble(date));

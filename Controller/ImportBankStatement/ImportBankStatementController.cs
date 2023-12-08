@@ -104,7 +104,7 @@ namespace PLApp.Controller.ImportBankStatement
                     {
                         DateTime transactionDate = CommonTools.ConvertToDate((usedRange.Cells[i, "A"] as ExcelClass.Range).Value2);
                         string details = "";
-                        if(transactionDate.Date != DateTime.Parse("01/01/0001").Date)
+                          if(transactionDate.Date != DateTime.Parse("01/01/0001").Date)
                         {
                             //Starting point of new startment.
                             bankTransaction.transactionDate = transactionDate;
@@ -133,7 +133,7 @@ namespace PLApp.Controller.ImportBankStatement
                             {
                                 isAvail = context.BankTransactions.Where(i => (
                                 i.transactionDate.Date == bankTransaction.transactionDate.Date &&
-                                i.transactionType == bankTransaction.transactionType &&
+                                i.transactionType == bankTransaction.transactionType   &&
                                 i.documentCategory == bankTransaction.documentCategory &&
                                 i.voucherNumber == bankTransaction.voucherNumber &&
                                 i.recipientName == bankTransaction.recipientName &&
@@ -164,6 +164,7 @@ namespace PLApp.Controller.ImportBankStatement
                 else
                 {
                     var x = 0;
+                    MessageBox.Show("Unable to Import due to the statement row count is not acceptable, Please check statement");
                 }
             }
             catch(Exception ex)

@@ -6,6 +6,7 @@ using PLApp.Entity.TableEntity;
 using PLApp.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Drawing;
 using System.Linq;
 using System.Net.Http.Headers;
@@ -39,7 +40,7 @@ namespace PLApp.Controller.IssueBankStatement
                 DateTime dateEnd = CommonTools.dateParseEnding(DateTo);
                 return context.BankTransactions.Where(i => i.bankAccountId == bankAccount.Id &&
                                                i.transactionDate.Date >= dateBegin.Date &&
-                                               i.transactionDate.Date <= dateEnd.Date).ToList();
+                                               i.transactionDate.Date <= dateEnd.Date).OrderBy(i=>i.transactionDate).ToList();
             }
         }
 
@@ -51,9 +52,20 @@ namespace PLApp.Controller.IssueBankStatement
                 double pastTransactionAmount = context.BankTransactions.Where(i => i.bankAccountId == bankAccount.Id &&
                                                         i.transactionDate.Date < dateBegin.Date).Select(i =>i.getAddedValue()
                                                         ).ToList().Sum();
-                return bankAccount.OpenBalanceAmount + pastTransactionAmount;
+                return Math.Round(bankAccount.OpenBalanceAmount + pastTransactionAmount,2);
             }
         }
+        public double getAccountBalance(int bankId, double openBalance)
+        {
+            using (TableContext context = new TableContext())
+            {
+                DateTime dateBegin = CommonTools.dateParseEnding(DateTime.Now);
+                double pastTransactionAmount = context.BankTransactions.Where(i => i.bankAccountId == bankId).Select(i => i.getAddedValue()
+                                                        ).ToList().Sum();
+                return openBalance + pastTransactionAmount;
+            }
+        }
+
 
         public double getClosingBalance(DateTime dateFrom, DateTime DateTo)
         {
@@ -65,7 +77,7 @@ namespace PLApp.Controller.IssueBankStatement
                 double TransactionAmount = context.BankTransactions.Where(i => i.bankAccountId == bankAccount.Id &&
                                                i.transactionDate.Date >= dateBegin.Date &&
                                                i.transactionDate.Date <= dateEnd.Date).Select(i=>i.getAddedValue()).ToList().Sum();
-                return getOpenAmount(dateFrom) + TransactionAmount;
+                return Math.Round( getOpenAmount(dateFrom) + TransactionAmount,2);
             }         
         }
 
@@ -94,20 +106,22 @@ namespace PLApp.Controller.IssueBankStatement
                 worksheet.Cells[startRow, "B"] = bankStatement.transactionDate;
                 worksheet.Cells[startRow, "C"] = bankStatement.inOut;
                 worksheet.Cells[startRow, "D"] = bankStatement.amount;
-                worksheet.Cells[startRow, "E"] = bankStatement.details;
-                worksheet.Cells[startRow, "F"] = bankStatement.balace;              
+                worksheet.Cells[startRow, "E"] = bankStatement.recipientName;
+                worksheet.Cells[startRow, "F"] = bankStatement.recipientAccount;
+                worksheet.Cells[startRow, "G"] = bankStatement.details;
+                worksheet.Cells[startRow, "H"] = bankStatement.balace;              
                 startRow++;
             }
 
-            string fileName = bankAccount.AccountName + "_Statement_" + DateTime.Now.ToString("MMddyyyy") + ".xlsx";
+            string fileName = bankAccount.AccountName + "_Statement_" + DateTime.Now.ToString("MMddyyyyhhmmss") + ".xlsx";
             saveSheet(fileName);
             excelService.CloseSheet();
         }
 
         private void InsertNormalRow(int rowNum)
         {
-            worksheet.Range["A" + rowNum.ToString(), "F" + rowNum.ToString()].Insert(XlInsertShiftDirection.xlShiftDown);
-            worksheet_template.Range["A1", "F1"].Copy(worksheet.Range["A" + rowNum.ToString()]);
+            worksheet.Range["A" + rowNum.ToString(), "H" + rowNum.ToString()].Insert(XlInsertShiftDirection.xlShiftDown);
+            worksheet_template.Range["A1", "H1"].Copy(worksheet.Range["A" + rowNum.ToString()]);
             ExcelTools.AdjustRowHeight(worksheet, rowNum, 15.75);
         }
 

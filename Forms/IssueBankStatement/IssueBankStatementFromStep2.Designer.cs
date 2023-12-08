@@ -33,6 +33,8 @@
             Column2 = new DataGridViewTextBoxColumn();
             Column3 = new DataGridViewTextBoxColumn();
             Column4 = new DataGridViewTextBoxColumn();
+            Column7 = new DataGridViewTextBoxColumn();
+            Column8 = new DataGridViewTextBoxColumn();
             Column5 = new DataGridViewTextBoxColumn();
             Column6 = new DataGridViewTextBoxColumn();
             id = new DataGridViewTextBoxColumn();
@@ -63,7 +65,7 @@
             dgvBankTransactions.AllowUserToAddRows = false;
             dgvBankTransactions.BackgroundColor = Color.White;
             dgvBankTransactions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvBankTransactions.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column6, id });
+            dgvBankTransactions.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column7, Column8, Column5, Column6, id });
             dgvBankTransactions.Location = new Point(47, 220);
             dgvBankTransactions.MultiSelect = false;
             dgvBankTransactions.Name = "dgvBankTransactions";
@@ -105,6 +107,24 @@
             Column4.Name = "Column4";
             Column4.ReadOnly = true;
             Column4.Width = 150;
+            // 
+            // Column7
+            // 
+            Column7.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Column7.HeaderText = "Recipient Acc Name";
+            Column7.MinimumWidth = 150;
+            Column7.Name = "Column7";
+            Column7.ReadOnly = true;
+            Column7.Width = 150;
+            // 
+            // Column8
+            // 
+            Column8.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Column8.HeaderText = "Recipient Acc Num";
+            Column8.MinimumWidth = 150;
+            Column8.Name = "Column8";
+            Column8.ReadOnly = true;
+            Column8.Width = 150;
             // 
             // Column5
             // 
@@ -196,7 +216,7 @@
             // 
             // dtpDateTo
             // 
-            dtpDateTo.CustomFormat = "MMMM yyyyy";
+            dtpDateTo.CustomFormat = "MMMM yyyy";
             dtpDateTo.Format = DateTimePickerFormat.Custom;
             dtpDateTo.Location = new Point(269, 61);
             dtpDateTo.Name = "dtpDateTo";
@@ -206,7 +226,7 @@
             // 
             // dtpDateFrom
             // 
-            dtpDateFrom.CustomFormat = "MMMM yyyyy";
+            dtpDateFrom.CustomFormat = "MMMM yyyy";
             dtpDateFrom.Format = DateTimePickerFormat.Custom;
             dtpDateFrom.Location = new Point(72, 61);
             dtpDateFrom.Name = "dtpDateFrom";
@@ -348,13 +368,6 @@
         private Label lblBankName;
         private Label lblAccName;
         private Button btnGenerate;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column3;
-        private DataGridViewTextBoxColumn Column4;
-        private DataGridViewTextBoxColumn Column5;
-        private DataGridViewTextBoxColumn Column6;
-        private DataGridViewTextBoxColumn id;
         private Label lblAccCurrency;
         private Label label9;
         private Label label10;
@@ -362,5 +375,14 @@
         private Label lblOpenBalance;
         private Label lblCloseBalance;
         private Button btnClose;
+        private DataGridViewTextBoxColumn Column1;
+        private DataGridViewTextBoxColumn Column2;
+        private DataGridViewTextBoxColumn Column3;
+        private DataGridViewTextBoxColumn Column4;
+        private DataGridViewTextBoxColumn Column7;
+        private DataGridViewTextBoxColumn Column8;
+        private DataGridViewTextBoxColumn Column5;
+        private DataGridViewTextBoxColumn Column6;
+        private DataGridViewTextBoxColumn id;
     }
 }

@@ -131,7 +131,7 @@ namespace PLApp.Forms.ImportBankStatement
                 if (!hasConflict)
                 {
                     BankTransaction transaction = new BankTransaction();
-                    transaction.transactionDate = CommonTools.ConvertToDate(dataGridViewRow.Cells[0].Value);
+                    transaction.transactionDate = CommonTools.ConvertToDateExact(dataGridViewRow.Cells[0].Value);
                     transaction.transactionType = CommonTools.ConvertToString(dataGridViewRow.Cells[1].Value);
                     transaction.documentCategory = CommonTools.ConvertToInt(dataGridViewRow.Cells[2].Value);
                     transaction.voucherNumber = CommonTools.ConvertToInt(dataGridViewRow.Cells[3].Value);

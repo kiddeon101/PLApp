@@ -12,6 +12,8 @@ namespace PLApp.Views
         public DateTime transactionDate { get; set; }
         public string inOut { get; set; }
         public double amount { get; set; }
+        public string recipientName { get; set; }
+        public string recipientAccount { get; set; }
         public string details { get; set; }
         public double balace { get; set; }
 

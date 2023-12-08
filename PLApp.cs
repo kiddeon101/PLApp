@@ -57,7 +57,7 @@ namespace PLApp
 
         private void btnReports_Click(object sender, EventArgs e)
         {
-            try 
+            try
             {
                 BankDetailedTransactionController bankDetailedTransactionController = new BankDetailedTransactionController();
                 bankDetailedTransactionController.createDetailedBankTransaction(DateTime.Now, DateTime.Now);

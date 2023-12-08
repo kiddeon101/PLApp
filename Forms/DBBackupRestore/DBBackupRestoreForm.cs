@@ -124,22 +124,22 @@ namespace PLApp.Forms.DBBackupRestore
             string filename = Path.GetFileName(txtRestoreLoc.Text).Replace(".bak","");
 
             //import latest version
-            bool isLatest = false;
-            try
-            {
-                using (TableContext context = new TableContext())
-                {
-                    isLatest = context.BackupHistory.OrderBy(i => i.backupDate).Last().fileName == filename || context.BackupHistory.Count() == 0;
-                    if (!isLatest)
-                    {
-                        MessageBox.Show("Unable to restore DB since it is not the newest version");
-                        return;
-                    }
-                }
-            }catch(Exception ex)
-            {
+            //bool isLatest = false;
+            //try
+            //{
+            //    using (TableContext context = new TableContext())
+            //    {
+            //        isLatest = context.BackupHistory.OrderBy(i => i.backupDate).Last().fileName == filename || context.BackupHistory.Count() == 0;
+            //        if (!isLatest)
+            //        {
+            //            MessageBox.Show("Unable to restore DB since it is not the newest version");
+            //            return;
+            //        }
+            //    }
+            //}catch(Exception ex)
+            //{
 
-            }
+            //}
             
 
             string database = conn.Database.ToString();

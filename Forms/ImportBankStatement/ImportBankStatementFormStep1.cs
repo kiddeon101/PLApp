@@ -2,6 +2,7 @@
 using PLApp.Controller;
 using PLApp.Controller.BankAccountManagement;
 using PLApp.Controller.ImportBankStatement;
+using PLApp.Controller.IssueBankStatement;
 using PLApp.Entity;
 using PLApp.Entity.TableEntity;
 using System;
@@ -21,11 +22,13 @@ namespace PLApp.Forms.ImportBankStatement
         private FormController formController;
         private BankManagementController bankManagementController;
         private ImportBankStatementController importBankStatementController;
+        private IssueBankStatementController issueBankStatementController;
         private TableContext tableContext;
         internal ImportBankStatementFormStep1(FormController formController)
         {
             bankManagementController = new BankManagementController();
             importBankStatementController = new ImportBankStatementController();
+            issueBankStatementController= new IssueBankStatementController();
             tableContext = new TableContext();
             this.formController = formController;
             InitializeComponent();
@@ -46,7 +49,8 @@ namespace PLApp.Forms.ImportBankStatement
             dgvBankAccounts.Rows.Clear();
             foreach (BankAccount bankAccount in bankAccounts)
             {
-                dgvBankAccounts.Rows.Add("ACC" + bankAccount.Id.ToString().PadLeft(4, '0'), bankAccount.AccountName, bankAccount.BankName, bankAccount.AccountCurrency, bankAccount.OpenBalanceAmount, bankAccount.OpenBalanceDate.ToString("dd/MM/yyyy"), 0, bankAccount.Id);
+                double accountBalance = Math.Round(issueBankStatementController.getAccountBalance(bankAccount.Id, bankAccount.OpenBalanceAmount),2);
+                dgvBankAccounts.Rows.Add("ACC" + bankAccount.Id.ToString().PadLeft(4, '0'), bankAccount.AccountName, bankAccount.BankName, bankAccount.AccountCurrency, bankAccount.OpenBalanceAmount, bankAccount.OpenBalanceDate.ToString("dd/MM/yyyy"), accountBalance, bankAccount.Id);
             }
 
 

@@ -50,7 +50,8 @@ namespace PLApp.Forms.UpdateDetailsTransactions
             dgvBankTransactions.Rows.Clear();
             foreach (BankTransaction bankTransaction in bankTransactions)
             {
-                dgvBankTransactions.Rows.Add("TR" + bankTransaction.Id.ToString().PadLeft(4, '0'), bankTransaction.transactionType, bankTransaction.documentCategory, bankTransaction.voucherNumber, bankTransaction.recipientName, bankTransaction.recipientAccountNum, bankTransaction.details, bankTransaction.inwardAmount, bankTransaction.outwardAmount, bankTransaction.Id);
+                String transactionId = "TR" + bankTransaction.Id.ToString().PadLeft(4, '0');
+                dgvBankTransactions.Rows.Add(bankTransaction.transactionDate.ToString("dd/MM/yyyy"), bankTransaction.transactionType, bankTransaction.documentCategory, bankTransaction.voucherNumber, bankTransaction.recipientName, bankTransaction.recipientAccountNum, bankTransaction.details, bankTransaction.inwardAmount, bankTransaction.outwardAmount, bankTransaction.Id);
             }
 
         }

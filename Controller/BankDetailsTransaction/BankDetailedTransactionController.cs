@@ -121,10 +121,11 @@ namespace PLApp.Controller.BankDetailsTransaction
                         worksheet.Cells[startRow, "C"] = tempBankTransaction.Id;
                         worksheet.Cells[startRow, "D"] = bankAccount.AccountCurrency;
                         worksheet.Cells[startRow, "E"] = tempBankTransaction.transactionDate;
-                        worksheet.Cells[startRow, "F"] = tempBankTransaction.isInOut() == "In" ? "Incomming" : "Outgoing";
+                        //worksheet.Cells[startRow, "F"] = tempBankTransaction.isInOut() == "In" ? "Incomming" : "Outgoing";
+                        worksheet.Cells[startRow, "F"] = tempBankDetailedTransaction.isIncomming ? "Incomming" : "Outgoing";
                         worksheet.Cells[startRow, "G"] = tempBankDetailedTransaction.category;
-                        worksheet.Cells[startRow, "H"] = tempBankDetailedTransaction.isIncomming ? tempBankDetailedTransaction.amount : 0;
-                        worksheet.Cells[startRow, "I"] = tempBankDetailedTransaction.isIncomming ? 0 : tempBankDetailedTransaction.amount;
+                        worksheet.Cells[startRow, "H"] = tempBankDetailedTransaction.isIncomming ? Math.Abs(tempBankDetailedTransaction.amount) : 0;
+                        worksheet.Cells[startRow, "I"] = tempBankDetailedTransaction.isIncomming ? 0 : Math.Abs(tempBankDetailedTransaction.amount);
                         worksheet.Cells[startRow, "J"] = tempBankDetailedTransaction.accountYear;
                         worksheet.Cells[startRow, "K"] = tempBankDetailedTransaction.accountMonth;
                         worksheet.Cells[startRow, "L"] = tempBankDetailedTransaction.customer;
@@ -161,7 +162,7 @@ namespace PLApp.Controller.BankDetailsTransaction
             //    startRow++;
             //}
 
-            string fileName = bankAccount.AccountName + "DetailedTransactions_" + DateTime.Now.ToString("MMddyyyy") + ".xlsx";
+            string fileName = bankAccount.AccountName + "DetailedTransactions_" + DateTime.Now.ToString("MMddyyyyhhmmss") + ".xlsx";
             saveSheet(fileName);
             excelService.CloseSheet();
         }

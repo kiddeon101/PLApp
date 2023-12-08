@@ -52,7 +52,9 @@ namespace PLApp.Forms.IssueBankStatement
             dgvBankAccounts.Rows.Clear();
             foreach (BankAccount bankAccount in bankAccounts)
             {
-                dgvBankAccounts.Rows.Add("ACC" + bankAccount.Id.ToString().PadLeft(4, '0'), bankAccount.AccountName, bankAccount.BankName, bankAccount.AccountCurrency, bankAccount.OpenBalanceAmount, bankAccount.OpenBalanceDate.ToString("dd/MM/yyyy"), 0, bankAccount.Id);
+                double currentBalance = Math.Round( issueBankStatementController.getAccountBalance( bankAccount.Id, bankAccount.OpenBalanceAmount ),2);
+
+                dgvBankAccounts.Rows.Add("ACC" + bankAccount.Id.ToString().PadLeft(4, '0'), bankAccount.AccountName, bankAccount.BankName, bankAccount.AccountCurrency, bankAccount.OpenBalanceAmount, bankAccount.OpenBalanceDate.ToString("dd/MM/yyyy"), currentBalance, bankAccount.Id);
             }
 
         }
